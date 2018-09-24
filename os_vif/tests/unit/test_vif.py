@@ -193,3 +193,12 @@ class TestVIFS(base.TestCase):
         self._test_vif(objects.vif.VIFHostDevice,
                        dev_address="0002:24:12.3",
                        port_profile=prof)
+
+    def test_vif_dpdk_nested(self):
+        self._test_vif(
+            objects.vif.VIFDpdkNested,
+            l3_setup=False,
+            pci_adress="0002:24:12.3",
+            dev_driver="virtio_pci",
+            selflink="/some/url",
+            resourceversion="1")

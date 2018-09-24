@@ -162,6 +162,32 @@ class VIFHostDevice(VIFBase):
 
 
 @base.VersionedObjectRegistry.register
+class VIFDpdkNested(VIFBase):
+    # For kuryr-kubernetes nested DPDK interfaces.
+
+    VERSION = '1.0'
+
+    fields = {
+        # Specify whether this vif requires L3 setup.
+        'l3_setup': fields.BooleanField(),
+
+        # PCI address of the device.
+        'pci_address': fields.StringField(),
+
+        # Name of the driver the device was previously bound to; it makes
+        # the controller driver agnostic (virtio, sr-iov, etc.)
+        'dev_driver': fields.StringField(),
+
+        # String containing URL representing object in Kubernetes API.
+        'selflink': fields.StringField(),
+
+        # String used in Kubernetes v1 API to identifies
+        # the server's internal version of this object.
+        'resourceversion': fields.StringField()
+    }
+
+
+@base.VersionedObjectRegistry.register
 class VIFPortProfileBase(osv_base.VersionedObject,
                          base.ComparableVersionedObject):
     # Base class for all types of port profile
